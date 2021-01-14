@@ -14,7 +14,7 @@ class HashMap {
         return this._hashTable[index].value;
     }
 
-    set(key, value){
+    set(key, value){ //best and average O(1) worst O(n)
         const loadRatio = (this.length + this._deleted + 1) / this._capacity;
         if (loadRatio > HashMap.MAX_LOAD_RATIO) {
             this._resize(this._capacity * HashMap.SIZE_RATIO);
@@ -43,7 +43,7 @@ class HashMap {
         this._deleted++;
     }
 
-    _findSlot(key) {
+    _findSlot(key) { // best and average case = O(1) worst case = O(n)
         const hash = HashMap._hashString(key);
         const start = hash % this._capacity;
 
@@ -56,7 +56,7 @@ class HashMap {
         }
     }
 
-    _resize(size) {
+    _resize(size) {// best and avg. O(n) worst case O(n^2)
         const oldSlots = this._hashTable;
         this._capacity = size;
         // Reset the length - it will get rebuilt as you add the items back
